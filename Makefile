@@ -4,7 +4,8 @@ CFlags = -g -Wall -m32
 
 # Sources = $(wildcard *.c)
 # Sources = count-words.c
-Sources = addresses.c
+# Sources = addresses.c
+Sources = base.c
 OFiles = $(Sources:.c=.o)
 Ex = lab1
 

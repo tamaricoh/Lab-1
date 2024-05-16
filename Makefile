@@ -1,10 +1,10 @@
 CC = gcc
-CFlags = -g -Wall
+CFlags = -g -Wall -m32
 # gcc -m32 -o addresses addresses.c
 
 # Sources = $(wildcard *.c)
-Sources = count-words.c
-# Sources = addresses.c
+# Sources = count-words.c
+Sources = addresses.c
 OFiles = $(Sources:.c=.o)
 Ex = lab1
 

@@ -14,6 +14,14 @@ void foo1();
 char g = 'g';
 void foo2();
 
+void print(void* arr, const char* typeArr) {
+    printf("Memory addresses of %s array:\n", typeArr);
+    for (int i = 0; i < 3; i++) {
+        printf("&%s[%d]: %p\n", typeArr, i, &arr[i]); 
+    }
+}
+
+
 int secondary(int x)
 {
     int addr2;
@@ -52,14 +60,57 @@ int secondary(int x)
    
     printf("Arrays Mem Layout (T1b):\n");
 
-    /* task 1 b here */
+    /* task 1 b here-------------------------------------- */
+    print(iarray, "int");
+    print(farray, "float");
+    print(darray, "double");
+    print(carray, "char");
+
+    printf("Hexadecimal values of pointers:\n");
+    printf("iarray:       %p\n", (void*)iarray);
+    printf("iarray+1:     %p\n", (void*)(iarray + 1));
+    printf("farray:       %p\n", (void*)farray);
+    printf("farray+1:     %p\n", (void*)(farray + 1));
+    printf("darray:       %p\n", (void*)darray);
+    printf("darray+1:     %p\n", (void*)(darray + 1));
+    printf("carray:       %p\n", (void*)carray);
+    printf("carray+1:     %p\n", (void*)(carray + 1));
+    // The '+' operator increments the pointer by the size of the type it points to.
+    // For <type> arrays, each element is sizeof(<type>) bytes long.
+    // -----------------------
+
+    /* task 1 c here-------------------------------------- */
+    // The distances printed in the point_at function represent the difference between the memory
+    // address of certain variables and the memory address passed as an argument p.
+    //-----------------------
     
     printf("Pointers and arrays (T1d): ");
 
-    /* task 1 d here */
-    
+    /* task 1 d here-------------------------------------- */
+    iarray2Ptr = iarray2;
+    carray2Ptr = carray2;
+    printf("\n");
+
+    printf("Values of iarray2: ");
+    while (iarray2Ptr < iarray2 + (sizeof(iarray2) / sizeof(iarray2[0]))) {
+        printf("%d ", *iarray2Ptr); 
+        iarray2Ptr++;
+    }
+    printf("\n");
+
+    printf("Values of carray2: ");
+    while (carray2Ptr < carray2 + (sizeof(carray2) / sizeof(carray2[0]))) { 
+        printf("%c ", *carray2Ptr); 
+        carray2Ptr++;
+    }
+    printf("\n");
+
+    int* p; // uninitialized pointer variable
+    printf("Value of uninitialized pointer p: %p\n", p); // it changes every time
+    //-----------------------
 
 }
+
 
 int main(int argc, char **argv)
 { 
@@ -72,8 +123,16 @@ int main(int argc, char **argv)
 	
 	secondary(0);
     
+
     printf("Command line arg addresses (T1e):\n");
-    /* task 1 e here */
+    /* task 1 e here-------------------------------------- */
+    printf("Address of argv: %p\n", (void*)&argv);
+    
+    for (int i = 0; i < argc; i++) {
+        printf("Address of argv[%d]: %p, Content: %s\n", i, (void*)&argv[i], argv[i]);
+    }
+    // stored on the stack. The memory location of argv itself points to a location on the stack
+    //-----------------------
     
     return 0;
 }
@@ -93,7 +152,10 @@ void point_at(void *p)
     printf("- dist3: (size_t)&foo - (size_t)p:  %ld\n", dist3);
     
     printf("Check long type mem size (T1a):\n");
-    /* part of task 1 a here */
+    /* part of task 1 a here-------------------------------------- */
+    printf("Size of long data type: %zu bytes\n", sizeof(long));
+    // -----------------------
+
 
     printf("- addr0: %p\n", &addr0);
     printf("- addr1: %p\n", &addr1);
